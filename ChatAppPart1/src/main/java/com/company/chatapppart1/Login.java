@@ -45,7 +45,7 @@ public boolean checkUserName(String username){
  //Cellphone number Validation should contain =27 and i s no more than 12 characters long
  
  public boolean checkCellphoneNumber(String phoneNumber){
-     return phoneNumber.startWith("+27") && phoneNumber.length()<=12;
+     return phoneNumber.startsWith("+27") && phoneNumber.length()<=12;
  }
  
          
@@ -58,7 +58,7 @@ public String registerUser(String username, String password, String phoneNumber)
      if (!checkPasswordComplexity(password)) { 
          return "Password is not correctly formatted; please ensure that the password contains at least eight characters, a capital letter, a number, and a special character."; 
      }
-     if (!checkCellPhoneNumber(phoneNumber)) { 
+     if (!checkCellphoneNumber(phoneNumber)) { 
          return "Cell phone number incorrectly formatted or does not contain international code."; 
      
      }
@@ -84,6 +84,7 @@ public String returnLoginStatus(boolean success){
 }
 
 
+
     
 
 
@@ -91,4 +92,4 @@ public String returnLoginStatus(boolean success){
     
     
     
-}
+
