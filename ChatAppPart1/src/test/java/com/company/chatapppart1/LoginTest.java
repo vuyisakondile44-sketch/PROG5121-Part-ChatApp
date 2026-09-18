@@ -31,7 +31,7 @@ public class LoginTest {
         //Create a Login object with valid registration information.
         Login login = new Login(
         "Kyle",
-        "Masoka",
+        "Smith",
         "kyl_1",
         "Ch&&sec@ke99!",
         "+27838968976");
@@ -52,7 +52,7 @@ public class LoginTest {
         //Create a Login object with a valid password.
         Login login = new Login(
         "Kyle",
-        "Kondile",
+        "Smith",
         "kyl_1",
         "Ch&&sec@ke99!",
         "+27838968976");
@@ -75,7 +75,7 @@ public class LoginTest {
         //Creates a Login object with a valid cellphone number.
         Login login = new Login(
         "Kyle",
-        "Kondile",
+        "Smith",
         "kyl_1",
         "Ch&&sec@ke99!",
         "+27838968976");
@@ -95,7 +95,7 @@ public class LoginTest {
         //Creates a Login object using valid registration details.
         Login login = new Login(
         "Kyle",
-        "Kondile",
+        "Smith",
         "kyl_1",
         "Ch&&sec@ke99!",
         "+27838968976");
@@ -127,7 +127,7 @@ public class LoginTest {
         //Creates a Login object using registered credentials.
         Login login = new Login(
         "Kyle",
-        "Kondile",
+        "Smith",
         "kyl_1",
         "Ch&&sec@ke99!",
         "+27838968976");
@@ -157,7 +157,7 @@ public class LoginTest {
         //Creates a Login object using valid registration details.
         Login login = new Login(
         "Kyle",
-        "Kondile",
+        "Smith",
         "kyl_1",
         "Ch&&sec@ke99!",
         "+27838968976");
@@ -184,7 +184,7 @@ public class LoginTest {
         *Login.java to add the missing space and period, update this string too.
         */
         assertEquals(
-        "Welcome KyleKondile, it is great to see you again", login.returnLoginStatus());
+        "Welcome Kyle Smith, it is great to see you again", login.returnLoginStatus());
     }
     /**
      * Test of checkUserName() method with an invalid username.
@@ -198,7 +198,7 @@ public class LoginTest {
         //creates a login object using invalid registration details.
         Login login = new Login(
         "Kyle",
-        "Kondile",
+        "Smith",
         "kyle!!!!!!",
         "Ch&&sec@ke99!",
         "+27838968976"
@@ -218,7 +218,7 @@ public class LoginTest {
         //Creates a login object using invalid registration details
         Login login = new Login(
         "Kyle",
-        "Kondile",
+        "Smith",
         "kyl_1",
         "password",
         "+27838968976"
@@ -239,7 +239,7 @@ public class LoginTest {
         //Creates a login object using invalid registration details
         Login login = new Login(
         "Kyle",
-        "Kondile",
+        "Smith",
         "kyl_1",
         "Ch&&sec@ke99!",
         "08966553"
