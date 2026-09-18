@@ -28,40 +28,41 @@ public class Main {
         Scanner input =  new Scanner(System.in);
         
         //Display the registration heading
-        System.out.println("====REGISTRATION====");
+        System.out.println("=== WELCOME TO CHATAPP ===");
         
         //Ask the user to enter their first name.
         System.out.print("Enter your first name: ");
         String firstName = input.nextLine();
         //this ensures that the user cannot continue without entering their first name.
-        while (firstName.trim().isEmpty()) {
-            System.out.println("First name cannot be empty");
-            System.out.print("Enter your first name: ");
-            firstName = input.nextLine();
+        
             
-        }
+       
         
         //Ask the user to enter their last name.
-        System.out.print ("Enter your last name: ");
+        System.out.print("Enter your last name: ");
         String lastName = input.nextLine();
-        //this ensures that the user cannot continue without entering their last name.
-        while (lastName.trim().isEmpty()){
-            System.out.println("Last name cannot be empty");
-            System.out.print("Enter your last name: ");
-            lastName = input.nextLine();
-            
-        }
+        
+        
         
         //Ask the user to enter their username.
         System.out.print ("Enter your username: ");
         String username = input.nextLine();
-        //this ensures that the user cannot continue without entering their username.
-        while (username.trim().isEmpty()){
-            System.out.println("Username cannot be empty");
-            System.out.print("Enter your username: ");
-            username = input.nextLine();
-        }
-        /*
+        
+        
+       
+        
+        
+        //Ask the user to enter their password.
+        System.out.print ("Enter your password: ");
+        String password = input.nextLine();
+        
+        
+    
+         // Ask the user to enter their South African cellphone number.
+         System.out.print ("Enter your cellphone number: ");
+         String cellPhoneNumber = input.nextLine();
+            
+            /*
          Create a Login object using the information captured so far.
         The password and cellphone number are temporarily empty because
         they have not been entered yet.
@@ -70,126 +71,103 @@ public class Main {
                 firstName,
                 lastName,
                 username,
-                "",
-                ""
+                password,
+                cellPhoneNumber
+                
         );
         
-        // Check the username before continuing to the password.
-        if (!login.checkUserName()){
-            System.out.println(
-                    "Username is not correctly formatted; please ensure that your username "
-                            + "contains an underscore and is no more than five characters in lenght."
-            );
-            return;
-        }
-        
-        //Ask the user to enter their password.
-        System.out.print ("Enter your password: ");
-        String password = input.nextLine();
-        
-        while (password.trim().isEmpty()) {
-            System.out.println("Password can not be empty");
-            System.out.print ("Enter your password");
-            password = input.nextLine();
-        }
-        
-        //Store the password in the Login object.
-        setPassword(password);
-        
-        //Check the password before continuing to the cellphone number.
-        if(checkPasswordComplexity()){
-            System.out.println(
-                    "password is not correctly formatted please ensure that the password"
-                            + "contains at least eight characters, a capital letter, a number,"
-                            + "and a special character."
-            );
-            return;
-        }
-        
-            // Ask the user to enter their cellphone number.
-            System.out.print ("Enter your cellphone number: ");
-            String phoneNumber = input.nextLine();
+        /*
+        *
+        *registerUser() performs the registration validation
+        *inside the Login class.
+        *
+        */
+        String registrationMessage = login.registerUser();
             
-            while (phoneNumber.trim().isEmpty()){
-                System.out.println("Cellphone number cannot be empty");
-                System.out.print("Enter your cellphone number");
-                phoneNumber = input.nextLine();
-            }
+          
             
-            //Store the cellphone number in the Login object.
-            setPhoneNumber(phoneNumber);
+            //Display the registration success messages.
+            System.out.println();
+            System.out.println(registrationMessage);
             
-            //Check the cellphone number before continuing to login.
-            if (checkCellPhoneNumber()){
-                System.out.println(
-                        "Cellphone number is not correctly formatted; please ensure that the "
-                                + "cellphone number starts with +27 and is followed by 9 numbers."
-                );
-                return;
-            }
             
             /*
-            All registration requirements have been successfully met.
-            Display the registration success messages.
+            * If registration failed, Part 1 does not require us
+            *to keep asking the user again
+            *
+            *Therefore we stop here
+            *
             */
-            System.out.println();
-            System.out.println(login.registerUser());
+            
+            if (!login.isRegistered()) {
+                
+                System.out.println();
+                System.out.println("Registration was not completed.");
+                
+                input.close();
+                
+                //Return ends the main() method.
+                return;
+            }
+
+            /*
+            *==================================================================
+            *LOGIN
+            *==================================================================
+            *
+            *This section is reached ONLY when registration succeeds.
+            */
+
             
             //Display the login heading.
             System.out.println();
             System.out.println("=====LOGIN=====");
             
             //Ask the user to enter their username.
-            System.out.print ("Enter your username: ");
-            String enteredUsername = input.nextLine();
+            System.out.print ("Enter your username to log in: ");
+            String loginUsername = input.nextLine();
             
-            while (enteredUsername.trim().isEmpty()){
-                System.out.println("Username cannot be empty.");
-                System.out.print ("Enter your username:");
-                enteredUsername = input.nextLine();
-            }
-                
-                //check whether entered usernamame matches the register username.
-                if (!enteredUsername.equals (getUsername())){
-                    System.out.println("Username or password incorrect, please try again.");
-                    return;
-                }
-                
-                //Ask the user to enter their password.
-                System.out.print ("Enter your password:");
-                String enteredPassword = input.nextLine();
-                
-                while (enteredPassword.trim().isEmpty()) {
-                    System.out.println("password cannot be empty.");
-                    System.out.print ("Enter your password: ");
-                    enteredPassword = input.nextLine();
-                }
-                
-                //Store the username and password entered during login.
-                login.setEnteredUsername(enteredUsername);
-                login.setEnteredPassword(enteredPassword);
-                
-                //Check whether the login credentials are correct.
-                System.out.println(login.returnLoginStatus());
-            }
-
-    private static Object getUsername() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            //Ask the user to enter their password.
+            System.out.print ("Enter your password:");
+            String loginPassword = input.nextLine();
+            
+            
+            /*
+            *Store the login attempt inside the Login object.
+            */
+            
+            login.setEnteredUsername(loginUsername);
+            login.setEnteredPassword(loginPassword);
+            
+            /*
+            *loginUser() performs the comparison
+            *
+            *true means the username/password matched
+            *false means they did not match
+            *
+            */
+            login.loginUser();
+            
+            
+            /*
+            *returningLoginStatus() returns either:
+            *
+            *Welcome <first name>, <last name> ...
+            *
+            *Username or password incorrect....
+            */
+            String loginMessage = login.returnLoginStatus();
+            
+            
+            //Display the final authentication message.
+            System.out.println();
+            System.out.println(loginMessage);
+            
+            //Close the Scanner  once all input is finished
+            input.close();
+            
     }
-
-    private static boolean checkPasswordComplexity() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private static void setPassword(String password) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private static boolean checkCellPhoneNumber() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private static void setPhoneNumber(String phoneNumber) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-            }
+    
+}
+                
+                

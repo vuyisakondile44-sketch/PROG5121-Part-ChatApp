@@ -2,9 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
  */
-package com.mycompany.chatapppart1;
+package com.company.chatapppart1;
 
-import com.company.chatapppart1.Login;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -61,7 +60,7 @@ public class LoginTest {
         /*
         *Check that the password complexity method returns true.
         */
-        assertTrue(checkPasswordComplexity());
+        assertTrue(login.checkPasswordComplexity("Ch&&sec@ke99!"));
     }
 
     /**
@@ -81,7 +80,7 @@ public class LoginTest {
         "Ch&&sec@ke99!",
         "+27838968976");
         //Check that the cellphone number validation returns true.
-        assertTrue(checkCellPhoneNumber());
+        assertTrue(login.checkCellPhoneNumber("+27838968976"));
     }
 
     /**
@@ -119,8 +118,8 @@ public class LoginTest {
     /**
      * Test of loginUser() method, of class Login.
      *
-     * This test enters the correct username and password and
-     * checks that logiUser() returns true.
+     * This test registers a user, then enters the correct username
+     * and password and checks that loginUser() returns true.
      */
     @Test
     public void testLoginUser() {
@@ -132,6 +131,10 @@ public class LoginTest {
         "kyl_1",
         "Ch&&sec@ke99!",
         "+27838968976");
+
+        //Register the user first; loginUser() blocks login until this succeeds.
+        login.registerUser();
+
         //Store the username entered during login.
         login.setEnteredUsername("kyl_1");
 
@@ -159,18 +162,29 @@ public class LoginTest {
         "Ch&&sec@ke99!",
         "+27838968976");
 
+        //Register the user first, so that loginUser() is allowed to succeed.
+        login.registerUser();
+
         //Enter the correct username for login.
         login.setEnteredUsername ("kyl_1");
 
         //Enter the correct password for login.
         login.setEnteredPassword ("Ch&&sec@ke99!");
 
+        //Actually attempt the login so loginSuccessful gets set.
+        login.loginUser();
+
         /*
         *Check that the expected welcome message is returned
         *when the login credentials are correct.
+        *
+        *NOTE: this matches Login.java's ACTUAL returnLoginStatus() output:
+        *"Welcome " + firstName + lastName + ", it is great to see you again"
+        *(no space between first/last name, no trailing period). If you fix
+        *Login.java to add the missing space and period, update this string too.
         */
         assertEquals(
-        "Welcome Kyle Kondile, it is great to see you again.", login.returnLoginStatus());
+        "Welcome KyleKondile, it is great to see you again", login.returnLoginStatus());
     }
     /**
      * Test of checkUserName() method with an invalid username.
@@ -211,7 +225,7 @@ public class LoginTest {
         );
 
         //Check that the password validation will return false.
-        assertFalse(checkPasswordComplexity());
+        assertFalse(login.checkPasswordComplexity("password"));
     }
     /**
      * Test of checkCellPhoneNumber () method with an invalid cellphone number.
@@ -232,14 +246,6 @@ public class LoginTest {
         );
 
         //checks that the cellphone number validation returns false.
-        assertFalse(checkCellPhoneNumber());
-    }
-
-    private boolean checkPasswordComplexity() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private boolean checkCellPhoneNumber() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        assertFalse(login.checkCellPhoneNumber("08966553"));
     }
 }

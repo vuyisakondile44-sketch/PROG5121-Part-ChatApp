@@ -2,6 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package com.company.chatapppart1;
 
 /**
@@ -26,7 +30,6 @@ public class Login {
     private boolean registered;
 //Stores whether the most recent login attempt was successful.
     private boolean loginSuccessful; 
-    private final String userName;
 /*
 *===========================================================
 *CONSTRUCTOR
@@ -35,18 +38,18 @@ public class Login {
 *The constructor recieves the registration information
 *when a new Login object is created
 */
-public Login(String firtName,
+public Login(String firstName,
              String lastName,
-             String userName,
+             String username,
              String password,
-             String cellphoneNumber) {
+             String cellPhoneNumber) {
  
 //"This" refers to the fields belonging to this object.
     this.firstName = firstName;
     this.lastName = lastName;
-    this.userName = userName;
+    this.username = username;
     this.password = password;
-    this.cellPhoneNumber = cellphoneNumber;
+    this.cellPhoneNumber = cellPhoneNumber;
 
 
     //A new user has not yet been registered or logged in.
@@ -188,26 +191,38 @@ public String registerUser(){
 		//String used to store all registration messages.
 		String message = "";
 		
+		
+		boolean userNameValid = checkUserName();
+		boolean passwordValid = checkPasswordComplexity(this.password);
+		boolean cellPhoneValid = checkCellPhoneNumber(this.cellPhoneNumber);
+		
 		//Check whether the username is correctly formatted.
-		if (checkUserName()){
+		if (userNameValid){
 			message += "Username successfully captured.\n";
 		} else {
 			message += "Username is not correctly formatted; please ensure that your username contains an underscore and is no more than five characters in length.\n";
 		}
 		
 		//Check whether the password meets the complexity requirements.
-		if (checkPasswordComplexity()){
+		if (passwordValid){
 			message += "Password successfully captured.\n";
 		} else {
 			message += "Password is not correctly formatted; please ensure that the password contains at least eight characters, a capital letter, a number, and a special character.\n";
 		}
 		
 		//Check whether the cellphone number is correctly formatted.
-		if (checkCellPhoneNumber()){
+		if (cellPhoneValid){
 			message += "Cell phone number successfully added.\n";
 		}else {
 			message += "Cell phone number incorrectly formatted or does not contain international code.\n";
 		}
+		
+		/*
+		*Registration only counts as successful when every field passed
+		*validation. This flag is what isRegistered() reports, and what
+		*loginUser() checks before allowing a login attempt.
+		*/
+		this.registered = userNameValid && passwordValid && cellPhoneValid;
 		
 		//Return all the registration messages to the user.
 		return message;
@@ -310,34 +325,4 @@ public boolean isRegistered() {
     return registered;
 }
 
-
-    private boolean checkPasswordComplexity() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-
-    boolean checkCellPhoneNumber() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private boolean CellPhoneNumber() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private boolean PasswordComplexity() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }
-
-
-
-
-
-    
-
-
-    
-    
-    
-    
-
