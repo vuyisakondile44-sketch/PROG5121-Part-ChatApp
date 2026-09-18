@@ -149,11 +149,11 @@ public boolean checkUserName(){
 *=============================================================
 *checkCellPhoneNumber ()
 *=============================================================
-**Regex adapted from:
-*Author/Website
-*Page/Article:
-*URL:
-*Accessed:
+**Regex adapted from: Stack Overflow
+*Author/Website:
+*Page/Article: Validate South Africa Cell Phone Number
+*URL:"https://stackoverflow.com/questions/4058001/validate-south-africa-cell-phone-number?newreg=fda3e9f51e5249cda908314ce64a5741"
+*Accessed:18 September 2026
 */
  
 
